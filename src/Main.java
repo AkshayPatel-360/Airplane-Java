@@ -14,8 +14,24 @@ public class Main {
 
             switch(choice) {
                 case 1:
-                    //airplane.start();
+                    airplane.startMotor();
                     break;
+
+                case 2:
+                    airplane.takeOff();
+                    break;
+                case 3:
+                    airplane.stopMotor();
+                    break;
+                case 4:
+                    airplane.increaseAltitude();
+                    break;
+                case 5:
+                    airplane.decreaseAltitude();
+                    break;
+                case 6:
+                    return;
+
 
 
             }

@@ -1,8 +1,8 @@
 package airplaneException;
 
 public class AirplaneCrashedException extends  Exception{
-    public AirplaneCrashedException()
+    public AirplaneCrashedException(String message)
     {
-
+        super(message);
     }
 }

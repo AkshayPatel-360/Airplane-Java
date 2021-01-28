@@ -1,3 +1,5 @@
+import airplaneException.*;
+
 public class Airplane {
 
     private boolean ismotorON = false;
@@ -7,17 +9,11 @@ public class Airplane {
     private boolean isGrounded = true;
 
 
-
-    public void startMotor()
-    {
+    public void startMotor() throws AirplaneCrashedException, AirplaneMotorAlreadyStartedException {
         crashed(altitude);
+        motorIsAlreadyStarted(ismotorON && !isExploded);
 
-        if (ismotorON && !isExploded)
-        {
-            System.out.println("Motor has already been started ");
-        }
-
-        else if (!ismotorON && !isExploded)
+         if (!ismotorON && !isExploded)
         {
             ismotorON = true;
             System.out.println("Motor has been started");
@@ -25,32 +21,56 @@ public class Airplane {
 
     }
 
-    public void stopMotor()
+    public void motorIsAlreadyStarted(boolean b) throws AirplaneMotorAlreadyStartedException
     {
-        crashed(altitude);
-        if (!isGrounded && !isExploded)
+        if (b)
         {
-            System.out.println("You can not stop motor when Airplane is in the air");
-            System.out.println("Current altitude :" + altitude );
+            throw new AirplaneMotorAlreadyStartedException("");
         }
-        else if (ismotorON && isGrounded  && !isExploded)
+    }
+
+
+
+    /*-----------------------------------------------------------------------------------------------------------*/
+
+    public void stopMotor() throws AirplaneCrashedException, AirplaneMotorIsAlreadyStoppedException, AirplaneCantBeStoppedMidAirException {
+        crashed(altitude);
+        motorAlreadyStopped(!ismotorON);
+        motorCanNotbeStoppedMidAir(!isGrounded);
+
+
+         if (ismotorON && isGrounded  && !isExploded)
         {
             ismotorON = false;
             System.out.println("Motor has been stopped");
         }
     }
 
-
-
-    public void  takeOff()
-    {
-        crashed(altitude);
-        if (altitude> 0 && !isExploded)
-        {
-            System.out.println("Airplane already in the air. ");
+    public void motorAlreadyStopped(boolean b) throws AirplaneMotorIsAlreadyStoppedException {
+        if (b) {
+            throw new AirplaneMotorIsAlreadyStoppedException("");
         }
 
-        else if (ismotorON & altitude==0 && !isExploded)
+    }
+
+    public void motorCanNotbeStoppedMidAir(boolean b) throws AirplaneCantBeStoppedMidAirException {
+        if (b)
+        {
+            throw new AirplaneCantBeStoppedMidAirException("");
+        }
+    }
+
+
+    /*--------------------------------------------------------------------------------------------------------------*/
+
+
+    public void  takeOff() throws AirplaneCrashedException, StartMotorToTakeOffException, AirplaneAlreadyOnTheAirException {
+        crashed(altitude);
+        startMotorToTakeOff(!ismotorON);
+
+        airplaneAlreadyOnTheAir(altitude> 0 );
+
+        if (ismotorON & altitude==0 && !isExploded)
         {
             altitude = 1000;
             isTakeOff = true;
@@ -60,21 +80,34 @@ public class Airplane {
 
     }
 
-    public void increaseAltitude()
-    {
+    public void airplaneAlreadyOnTheAir(boolean b) throws AirplaneAlreadyOnTheAirException {
+
+        if (b)
+        {
+            throw new AirplaneAlreadyOnTheAirException("");
+        }
+
+    }
+
+    public void startMotorToTakeOff(boolean b) throws StartMotorToTakeOffException {
+        if (b)
+        {
+            throw new StartMotorToTakeOffException("");
+        }
+
+    }
+
+
+    /*--------------------------------------------------------------------------------------------------------------*/
+
+
+
+
+    public void increaseAltitude () throws AirplaneCrashedException, StartMotorToChangeAltitudeException, TakeOffToChangeAltitude {
         crashed(altitude);
-
-        if(!ismotorON && !isExploded && !isTakeOff && isGrounded)
-        {
-            System.out.println("Please start motor to increase altitude");
-        }
-
-        else if(ismotorON && !isExploded && !isTakeOff && isGrounded)
-        {
-            System.out.println("Please take off to increase altitude");
-        }
-
-        else if(ismotorON && !isExploded && isTakeOff && !isGrounded )
+        startMotorToIncreaseAltitude(!ismotorON );
+        taleOffToChangeAltitude(!isTakeOff);
+        if(ismotorON && !isExploded && isTakeOff && !isGrounded )
         {
             if (altitude >= 9000 )
             {
@@ -89,22 +122,31 @@ public class Airplane {
                 System.out.println("Current altitude : " + altitude);
             }
         }
+    }
 
+    public void startMotorToIncreaseAltitude(boolean b) throws StartMotorToChangeAltitudeException {
+        if (b)
+        {
+            throw new StartMotorToChangeAltitudeException("");
+        }
+    }
 
-
-
+    public void taleOffToChangeAltitude(boolean b) throws TakeOffToChangeAltitude
+    {
+        if (b)
+        {
+            throw new TakeOffToChangeAltitude("");
+        }
     }
 
 
+    /*--------------------------------------------------------------------------------------------------------------*/
 
-    public void decreaseAltitude()
-    {
+    public void decreaseAltitude() throws AirplaneCrashedException, StartMotorToChangeAltitudeException, TakeOffToChangeAltitude {
         crashed(altitude);
+        startMotorToIncreaseAltitude(!ismotorON );
+        taleOffToChangeAltitude(!isTakeOff);
 
-        if (isGrounded && !isExploded )
-        {
-            System.out.println("You are already on the ground you can not go down further");
-        }
 
         if (ismotorON && !isExploded && isTakeOff && altitude == 1000)
         {
@@ -125,21 +167,24 @@ public class Airplane {
     }
 
 
+    /*--------------------------------------------------------------------------------------------------------------*/
 
 
-    public void crashed(int altitude)
+    public void crashed(int altitude) throws AirplaneCrashedException
     {
         if(altitude >=11000 )
         {
             altitude = altitude + 1000;
-            System.out.println(" Airplane crashed ");
-            //System.out.println("Current altitude : " + altitude);
-
             isExploded = true;
+
+            throw new AirplaneCrashedException("Airplane Crashed");
 
         }
     }
 
+    public int getAltitude() {
+        return altitude;
+    }
 
 
 

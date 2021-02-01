@@ -22,9 +22,9 @@ public class Airplane {
 
     public void startMotor() throws AirplaneCrashedException, AirplaneMotorAlreadyStartedException {
 
-        switch (status){
+        switch (status) {
 
-            case EXPLODED :
+            case EXPLODED:
                 throw new AirplaneCrashedException("Airplane Exploded");
             case MOTOR_ON:
             case FLYING:
@@ -34,20 +34,7 @@ public class Airplane {
                 break;
         }
 
-       /* crashed(altitude);
-        motorIsAlreadyStarted(ismotorON);*/
-       /* if (!ismotorON) {
-            ismotorON = true;
-            System.out.println("Motor has been started");
-        }*/
     }
-
-  /*  public void motorIsAlreadyStarted(boolean b) throws AirplaneMotorAlreadyStartedException {
-        if (b) {
-            throw new AirplaneMotorAlreadyStartedException("");
-        }
-    }
-*/
 
 
     /*-----------------------------------------------------------------------------------------------------------*/
@@ -71,30 +58,10 @@ public class Airplane {
 
 
 
-       /* crashed(altitude);
-        motorAlreadyStopped(!ismotorON);
-        motorCanNotbeStoppedMidAir(!isGrounded);
-
-
-        if (ismotorON && isGrounded ) {
-            ismotorON = false;
-            System.out.println("Motor has been stopped");
-        }*/
-    }
-
-  /*  public void motorAlreadyStopped(boolean b) throws AirplaneMotorIsAlreadyStoppedException {
-        if (b) {
-            throw new AirplaneMotorIsAlreadyStoppedException("");
-        }
 
     }
 
-    public void motorCanNotbeStoppedMidAir(boolean b) throws AirplaneCantBeStoppedMidAirException {
-        if (b) {
-            throw new AirplaneCantBeStoppedMidAirException("");
-        }
-    }
-*/
+
 
     /*--------------------------------------------------------------------------------------------------------------*/
 
@@ -116,34 +83,10 @@ public class Airplane {
 
         }
 
-        /*crashed(altitude);
-        startMotorToTakeOff(!ismotorON);
-
-        airplaneAlreadyOnTheAir(altitude > 0);
-
-        if (ismotorON & altitude == 0 ) {
-            altitude = 1000;
-            isTakeOff = true;
-            isGrounded = false;
-            System.out.println("AirPlane took off \nCurrent Altitude : " + altitude);
-        }*/
 
     }
 
-  /*  public void airplaneAlreadyOnTheAir(boolean b) throws AirplaneAlreadyOnTheAirException {
 
-        if (b) {
-            throw new AirplaneAlreadyOnTheAirException("");
-        }
-
-    }
-
-    public void startMotorToTakeOff(boolean b) throws StartMotorToTakeOffException {
-        if (b) {
-            throw new StartMotorToTakeOffException("");
-        }
-
-    }*/
 
 
     /*--------------------------------------------------------------------------------------------------------------*/
@@ -201,34 +144,11 @@ public class Airplane {
                break;
        }
 
-        /*crashed(altitude);
-        startMotorToIncreaseAltitude(!ismotorON);
-        taleOffToChangeAltitude(!isTakeOff);
-
-
-        if (ismotorON  && isTakeOff && altitude == 1000) {
-            altitude = altitude - 1000;
-            isGrounded = true;
-            isTakeOff = false;
-            System.out.println("Airplane has been landed on the ground ");
-            System.out.println("Current altitude : " + altitude);
-        } else if (ismotorON && !isExploded && isTakeOff && altitude > 1000) {
-            altitude = altitude - 1000;
-            System.out.println("Current altitude : " + altitude);
-        }*/
 
     }
     /*--------------------------------------------------------------------------------------------------------------*/
 
-/*
-    public void crashed(int altitude) throws AirplaneCrashedException {
-        if (altitude >= 11000) {
-            altitude = altitude + 1000;
-            isExploded = true;
-            throw new AirplaneCrashedException("Airplane Crashed");
 
-        }
-    }*/
 
     public int getAltitude() {
         return altitude;

@@ -46,7 +46,7 @@ public class Main {
                         System.out.println("Airplane: Altitude decreased to " + airplane.getAltitude());
                         if (airplane.IsLanded())
                             System.out.println("Airplane: landed successfully");
-                    break;
+                        break;
                     case 6:
                         exit = true;
                         return;
@@ -61,6 +61,6 @@ public class Main {
                 System.err.println(exception.getMessage());
             }
 
-        }while (!exit) ;
+        } while (!exit);
     }
 }

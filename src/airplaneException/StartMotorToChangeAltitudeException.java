@@ -1,6 +1,6 @@
 package airplaneException;
 
-public class StartMotorToChangeAltitudeException extends Exception{
+public class StartMotorToChangeAltitudeException extends AirplaneException{
 
     public StartMotorToChangeAltitudeException(String message)
     {

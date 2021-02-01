@@ -1,6 +1,6 @@
 package airplaneException;
 
-public class AirplaneCantBeStoppedMidAirException extends Exception {
+public class AirplaneCantBeStoppedMidAirException extends AirplaneException {
 
     public AirplaneCantBeStoppedMidAirException(String message)
     {

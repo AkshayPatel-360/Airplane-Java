@@ -1,6 +1,6 @@
 package airplaneException;
 
-public class AirplaneMotorAlreadyStartedException extends Exception
+public class AirplaneMotorAlreadyStartedException extends AirplaneException
 {
     public AirplaneMotorAlreadyStartedException(String message)
     {

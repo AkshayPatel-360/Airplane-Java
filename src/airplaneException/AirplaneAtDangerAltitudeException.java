@@ -1,10 +1,10 @@
+
 package airplaneException;
 
-class AirplaneAtDangerAltitudeException extends Throwable {
+public class AirplaneAtDangerAltitudeException extends AirplaneException {
+
     public AirplaneAtDangerAltitudeException(String message)
     {
-
         super(message);
-
     }
 }

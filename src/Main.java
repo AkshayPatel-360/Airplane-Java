@@ -2,12 +2,13 @@ import airplaneException.*;
 
 public class Main {
 
-    public static void main(String[] args) throws AirplaneCrashedException {
-
+    public static void main(String[] args) {
         Airplane airplane = new Airplane();
         int choice = 0;
 
-        while (true) {
+        boolean exit = false;
+
+        do {
             System.out.println("-------------");
             System.out.println("1 – Start motor\n" +
                     "2 – Take off\n" +
@@ -18,89 +19,48 @@ public class Main {
 
             choice = IO.getInt();
 
-            switch (choice) {
-                case 1 -> {
-                    try {
+            try {
+                switch (choice) {
+                    case 1:
                         airplane.startMotor();
-                    } catch (AirplaneCrashedException airplaneCrashedException) {
-                        System.err.println("Airplane Crashed");
-                    } catch (AirplaneMotorAlreadyStartedException airplaneMotorAlreadyStartedException) {
-                        System.err.println("The motor has already been started ");
-                    }
+                        System.out.println("Airplane Started");
+                        break;
 
-
-                }
-
-
-                case 2 -> {
-                    try {
+                    case 2:
                         airplane.takeOff();
-                    } catch (AirplaneCrashedException airplaneCrashedException) {
-                        System.err.println("Airplane Crashed");
-                    } catch (StartMotorToTakeOffException startMotorToTakeOffException) {
-                        System.err.println("Please start motor to take off ");
-                    } catch (AirplaneAlreadyOnTheAirException e) {
-                        System.err.println("Airplane already in the air, You can't take off while you are in the air ");
-                    }
+                        System.out.println("AirPlane took off \nCurrent Altitude : " + airplane.getAltitude());
+                        break;
 
-
-                }
-
-                case 3 -> {
-                    try {
+                    case 3:
                         airplane.stopMotor();
-                    } catch (AirplaneCrashedException airplaneCrashedException) {
-                        System.err.println("Airplane Crashed");
-                    } catch (AirplaneMotorIsAlreadyStoppedException airplaneMotorIsAlreadyStoppedException) {
-                        System.err.println("The motor has already been stopped");
-                    } catch (AirplaneCantBeStoppedMidAirException e) {
-                        System.err.println("You can not stop motor when Airplane is in the air");
-                        System.err.println("Current altitude :" + airplane.getAltitude());
-                    }
+                        System.out.println("Motor has been stopped");
+                        break;
 
-                }
-
-
-                case 4 -> {
-                    try {
+                    case 4:
                         airplane.increaseAltitude();
-                    } catch (AirplaneCrashedException airplaneCrashedException) {
-                        System.err.println("Airplane Crashed");
-                    } catch (StartMotorToChangeAltitudeException e) {
-                        System.err.println("Please Start motor and take Off to increase altitude");
-                    } catch (TakeOffToChangeAltitude e) {
-                        System.err.println("Please take off to increase altitude");
-                    }
-                }
+                        System.out.println("Airplane: Altitude increased to " + airplane.getAltitude());
+                        break;
 
-
-                case 5 -> {
-                    try {
+                    case 5:
                         airplane.decreaseAltitude();
-                    } catch (AirplaneCrashedException airplaneCrashedException) {
-                        System.err.println("Airplane Crashed");
-                    } catch (StartMotorToChangeAltitudeException e) {
-                        System.err.println("Please Start motor and take Off to decrease altitude");
-                    } catch (TakeOffToChangeAltitude e) {
-                        System.err.println("Please take off to decrease altitude");
-                        System.err.println("Current altitude : " + airplane.getAltitude());
-                    }
+                        System.out.println("Airplane: Altitude decreased to " + airplane.getAltitude());
+                        if (airplane.IsLanded())
+                            System.out.println("Airplane: landed successfully");
+                    break;
+                    case 6:
+                        exit = true;
+                        return;
+
+
+                    default:
+                        System.out.println("Please enter valid Input");
+
                 }
 
-
-                case 6 -> {
-                    System.out.println("You have successfully exited ");
-                    return;
-                }
-
-                default -> System.out.println("Please enter valid Input");
-
-
+            } catch (AirplaneException exception) {
+                System.err.println(exception.getMessage());
             }
-        }
 
-
+        }while (!exit) ;
     }
-
-
 }

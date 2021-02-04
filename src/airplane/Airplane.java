@@ -1,4 +1,8 @@
+package airplane;
+
+import airplaneEnum.AirplaneEnum;
 import airplaneException.*;
+
 
 public class Airplane {
 
@@ -6,7 +10,7 @@ public class Airplane {
     private final int WARNING_ALTITUDE = 10000;
     public final int EXPLOSION_ALTITUDE = 12000;
 
-    private int altitude = 0;
+    public static int altitude = 0;
 
     private AirplaneEnum status = AirplaneEnum.MOTOR_OFF;
 
@@ -19,7 +23,7 @@ public class Airplane {
         switch (status) {
 
             case EXPLODED:
-                throw new AirplaneCrashedException("Airplane Exploded");
+                throw new AirplaneCrashedException("airplane.Airplane Exploded");
             case MOTOR_ON:
             case FLYING:
                 throw new AirplaneMotorAlreadyStartedException("Motor already started");
@@ -60,7 +64,7 @@ public class Airplane {
             case MOTOR_OFF:
                 throw new StartMotorToTakeOffException("Please start motor first");
             case FLYING:
-                throw new AirplaneAlreadyOnTheAirException("Airplane is in the air");
+                throw new AirplaneAlreadyOnTheAirException("airplane.Airplane is in the air");
             case MOTOR_ON:
                 status = AirplaneEnum.FLYING;
                 increaseAltitude();
@@ -76,7 +80,7 @@ public class Airplane {
         switch (status) {
 
             case EXPLODED:
-                throw new AirplaneCrashedException("Airplane Crashed");
+                throw new AirplaneCrashedException("airplane.Airplane Crashed");
             case MOTOR_OFF:
                 throw new StartMotorToChangeAltitudeException("Can not increase altitude without starting Motor");
             case MOTOR_ON:
@@ -109,7 +113,7 @@ public class Airplane {
         switch (status) {
 
             case EXPLODED:
-                throw new AirplaneCrashedException("Airplane crashed");
+                throw new AirplaneCrashedException("airplane.Airplane crashed");
             case MOTOR_OFF:
                 throw new StartMotorToChangeAltitudeException("Start motor First");
             case MOTOR_ON:

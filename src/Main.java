@@ -1,10 +1,15 @@
+import airplane.Airplane;
 import airplaneException.*;
+import gui.AirplaneGui;
 
 public class Main {
 
     public static void main(String[] args) {
         Airplane airplane = new Airplane();
         int choice = 0;
+        AirplaneGui gui = new AirplaneGui();
+
+
 
         boolean exit = false;
 
@@ -23,7 +28,7 @@ public class Main {
                 switch (choice) {
                     case 1:
                         airplane.startMotor();
-                        System.out.println("Airplane Started");
+                        System.out.println("airplane.Airplane Started");
                         break;
 
                     case 2:
@@ -38,14 +43,14 @@ public class Main {
 
                     case 4:
                         airplane.increaseAltitude();
-                        System.out.println("Airplane: Altitude increased to " + airplane.getAltitude());
+                        System.out.println("airplane.Airplane: Altitude increased to " + airplane.getAltitude());
                         break;
 
                     case 5:
                         airplane.decreaseAltitude();
-                        System.out.println("Airplane: Altitude decreased to " + airplane.getAltitude());
+                        System.out.println("airplane.Airplane: Altitude decreased to " + airplane.getAltitude());
                         if (airplane.IsLanded())
-                            System.out.println("Airplane: landed successfully");
+                            System.out.println("airplane.Airplane: landed successfully");
                         break;
                     case 6:
                         exit = true;
